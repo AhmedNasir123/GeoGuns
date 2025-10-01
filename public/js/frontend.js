@@ -19,7 +19,7 @@ const frontEndProjectiles = [];
 socket.on('updatePlayers', (backEndPlayers) => {
   for (const id in backEndPlayers) {
     const backEndPlayer = backEndPlayers[id];
-    
+
     if (!frontEndPlayers[id]) {
       frontEndPlayers[id] = new Player({
         x: backEndPlayer.x,
@@ -72,6 +72,11 @@ function animate() {
   for (const id in frontEndPlayers) {
     const frontEndPlayer = frontEndPlayers[id];
     frontEndPlayer.draw();
+  }
+
+  for (let i = frontEndProjectiles.length - 1; i >= 0; i--) {
+    const frontEndProjectile = frontEndProjectiles[i];
+    frontEndProjectile.update();
   }
 }
 
