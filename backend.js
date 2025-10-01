@@ -75,8 +75,17 @@ io.on('connection', (socket) => {
   });
 });
 
+// backend tick
 setInterval(() => {
+
+  // update projectile positions
+  for (const id in backEndProjectiles) {
+    backEndProjectiles[id].x += backEndProjectiles[id].velocity.x;
+    backEndProjectiles[id].y += backEndProjectiles[id].velocity.y;
+  }
+
   io.emit('updatePlayers', backEndPlayers);
+  io.emit('updateProjectiles', backEndProjectiles);
 }, 15);
 
 server.listen(port, () => {
