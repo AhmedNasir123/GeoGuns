@@ -45,8 +45,13 @@ socket.on('updatePlayers', (backEndPlayers) => {
         });
       } else {
         // for all other players, just update their position
-        frontEndPlayers[id].x = backEndPlayer.x;
-        frontEndPlayers[id].y = backEndPlayer.y;
+
+        gsap.to( frontEndPlayers[id], {
+          x: backEndPlayer.x,
+          y: backEndPlayer.y,
+          duration: 0.015,
+          ease: 'linear'
+        });
       }
     }
   }
