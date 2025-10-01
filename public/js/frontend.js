@@ -14,12 +14,12 @@ const x = canvas.width / 2;
 const y = canvas.height / 2;
 
 const frontEndPlayers = {};
+const frontEndProjectiles = [];
 
 socket.on('updatePlayers', (backEndPlayers) => {
   for (const id in backEndPlayers) {
     const backEndPlayer = backEndPlayers[id];
-    console.log(backEndPlayer);
-
+    
     if (!frontEndPlayers[id]) {
       frontEndPlayers[id] = new Player({
         x: backEndPlayer.x,

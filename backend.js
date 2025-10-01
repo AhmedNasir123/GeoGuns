@@ -30,7 +30,6 @@ io.on('connection', (socket) => {
   io.emit('updatePlayers', backEndPlayers);
 
   socket.on('disconnect', (reason) => {
-    console.log(reason);
     delete backEndPlayers[socket.id];
     io.emit('updatePlayers', backEndPlayers);
   });
@@ -53,8 +52,6 @@ io.on('connection', (socket) => {
         break;
     }
   });
-
-  console.log(backEndPlayers);
 });
 
 setInterval(() => {
