@@ -23,7 +23,8 @@ io.on('connection', (socket) => {
   backEndPlayers[socket.id] = {
     x: 500 * Math.random(),
     y: 500 * Math.random(),
-    color: `hsl(${Math.random() * 360}, 100%, 50%)`
+    color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+    sequenceNumber: 0
   };
 
   io.emit('updatePlayers', backEndPlayers);
@@ -34,11 +35,10 @@ io.on('connection', (socket) => {
     io.emit('updatePlayers', backEndPlayers);
   });
 
-  socket.on('keydown', (keyCode) => {
-    const player = backEndPlayers[socket.id];
-    if (!player) return;
+  socket.on('keydown', ({ keycode, sequenceNumber }) => {
+    backEndPlayers[socket.id].sequenceNumber = sequenceNumber;
 
-    switch (keyCode) {
+    switch (keycode) {
       case 'KeyW':
         backEndPlayers[socket.id].y -= SPEED;
         break;
