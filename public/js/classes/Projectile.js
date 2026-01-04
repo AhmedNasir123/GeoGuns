@@ -1,5 +1,9 @@
 class Projectile {
+<<<<<<< HEAD
   constructor({ x, y, radius, color, velocity }) {
+=======
+  constructor({ x, y, radius, color = 'white', velocity }) {
+>>>>>>> 3f0bfaa9f925e8bb81a3155298e6443ff59edc3e
     this.x = x
     this.y = y
     this.radius = radius

@@ -14,12 +14,34 @@ const x = canvas.width / 2;
 const y = canvas.height / 2;
 
 const frontEndPlayers = {};
+<<<<<<< HEAD
 const frontEndProjectiles = [];
+=======
+const frontEndProjectiles = {};
+
+socket.on('updateProjectiles', (backEndProjectiles) => {
+  for (const id in backEndProjectiles) {
+    const backEndProjectile = backEndProjectiles[id];
+
+    if (!frontEndProjectiles[id]) {
+      frontEndProjectiles[id] = new Projectile({
+        x: backEndProjectile.x,
+        y: backEndProjectile.y,
+        radius: 5,
+        color: frontEndPlayers[backEndProjectile.playerId]?.color,
+        velocity: backEndProjectile.velocity
+      });
+    } else {
+      frontEndProjectiles[id].x += backEndProjectiles[id].velocity.x;
+      frontEndProjectiles[id].y += backEndProjectiles[id].velocity.y;
+    }
+  }
+});
+>>>>>>> 3f0bfaa9f925e8bb81a3155298e6443ff59edc3e
 
 socket.on('updatePlayers', (backEndPlayers) => {
   for (const id in backEndPlayers) {
     const backEndPlayer = backEndPlayers[id];
-    console.log(backEndPlayer);
 
     if (!frontEndPlayers[id]) {
       frontEndPlayers[id] = new Player({
@@ -75,10 +97,17 @@ function animate() {
     frontEndPlayer.draw();
   }
 
+<<<<<<< HEAD
   // for (let i = frontEndProjectiles.length - 1; i >= 0; i--) {
   //   const frontEndProjectile = frontEndProjectiles[i];
   //   frontEndProjectile.update();
   // }
+=======
+  for (const id in frontEndProjectiles) {
+    const frontEndProjectile = frontEndProjectiles[id];
+    frontEndProjectile.draw();
+  }
+>>>>>>> 3f0bfaa9f925e8bb81a3155298e6443ff59edc3e
 }
 
 animate();
